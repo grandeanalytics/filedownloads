@@ -1,0 +1,49 @@
+create database moviebox;
+show databases;
+
+
+use moviebox;
+create table customers(
+	UserID int primary key,
+    UserName varchar(100),
+    SubscriptionType varchar(50),
+    JoinDate date
+);
+
+
+create table movies(
+	MovieID int primary key, 
+    Title varchar(50), 
+    Genre varchar(50), 
+    ReleaseYear date, 
+    Rating float
+);
+
+
+create table watchhistory(
+	HistoryID int primary key, 
+    UserID int, 
+    MovieID int, 
+    WatchDate date,
+    foreign key (UserID) references customers(UserID),
+    foreign key (MovieID) references movies(MovieID)
+);
+
+
+create table ratings(
+	RatingsID int primary key, 
+    UserID int, 
+    MovieID int, 
+    RatingScore float, 
+    ReviewText varchar(255), 
+    RatingDate date,
+    foreign key (UserID) references customers(UserID),
+    foreign key (MovieID) references movies(MovieID)
+);
+
+
+insert into customers values (1, "Stella", "Premium", "2010-02-05");
+select * from customers;
+describe table movies;
+insert into movies values (1, "Frozen", "kids", "2020-10-10", "4.5");
+select * from movies;
